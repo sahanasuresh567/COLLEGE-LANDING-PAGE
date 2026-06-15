@@ -1,0 +1,1194 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Aurevia University — Lighting the Way to Excellence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;0,900;1,400;1,700&family=IM+Fell+English:ital@0;1&family=Cinzel:wght@400;600;700;900&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+<style>
+/* =========================================================
+   DESIGN TOKENS — ROYAL FOREST GREEN & AGED GOLD
+   Light mode: parchment + deep forest + antique gold
+   Dark mode: near-black + muted forest + warm gold
+   ========================================================= */
+:root {
+  /* Forest greens */
+  --forest:     #1A3D2B;
+  --forest2:    #245C3E;
+  --forest3:    #0F2419;
+  --forest4:    #2E7052;
+  --forest-mid: #3D7A5C;
+
+  /* Antique gold */
+  --gold:       #C8A84B;
+  --gold-l:     #DEC27A;
+  --gold-d:     #9A7A28;
+  --gold-pale:  #F0E4B8;
+
+  /* Parchment / ivory */
+  --parchment:  #F6F0E0;
+  --parchment2: #EFE6CC;
+  --parchment3: #E5D9B6;
+  --ink:        #1A1208;
+  --ink2:       #2C1E0C;
+  --muted:      #5A4830;
+  --rule:       rgba(200,168,75,.28);
+
+  /* Light mode surfaces */
+  --bg:         #F6F0E0;
+  --bg2:        #EFE6CC;
+  --bg3:        #E5D9B6;
+  --surface:    #FDFAF2;
+  --surface2:   #F6F0E0;
+  --text:       #1A1208;
+  --text2:      #3A2C14;
+  --text-muted: #5A4830;
+  --border:     rgba(200,168,75,.28);
+  --nav-bg:     #0F2419;
+  --nav-text:   rgba(246,240,224,.65);
+  --nav-gold:   #C8A84B;
+  --hero-over:  linear-gradient(170deg, rgba(15,36,25,.88) 0%, rgba(26,61,43,.80) 55%, rgba(15,36,25,.92) 100%);
+  --stat-bg:    #1A3D2B;
+  --stat-text:  rgba(246,240,224,.55);
+  --fac-bg:     #0F2419;
+  --fac-card:   rgba(246,240,224,.04);
+  --card-bg:    #FDFAF2;
+  --card-hover: #F6F0E0;
+  --plaque-bg:  #1A3D2B;
+  --footer-bg:  #0F2419;
+  --shadow:     0 4px 32px rgba(15,36,25,.13);
+  --shadow-lg:  0 16px 64px rgba(15,36,25,.20);
+  --tr:         .3s ease;
+}
+
+[data-theme="dark"] {
+  --bg:         #111A12;
+  --bg2:        #162119;
+  --bg3:        #1C2B1E;
+  --surface:    #1A2B1C;
+  --surface2:   #1F3222;
+  --text:       #F0E8D0;
+  --text2:      #D8CEAD;
+  --text-muted: #A09070;
+  --border:     rgba(200,168,75,.22);
+  --rule:       rgba(200,168,75,.18);
+  --nav-bg:     #0A120B;
+  --nav-text:   rgba(240,232,208,.60);
+  --nav-gold:   #C8A84B;
+  --hero-over:  linear-gradient(170deg, rgba(8,18,10,.92) 0%, rgba(15,36,25,.88) 55%, rgba(8,18,10,.95) 100%);
+  --stat-bg:    #0A120B;
+  --stat-text:  rgba(240,232,208,.50);
+  --fac-bg:     #0A120B;
+  --fac-card:   rgba(240,232,208,.04);
+  --card-bg:    #1A2B1C;
+  --card-hover: #1F3222;
+  --plaque-bg:  #0A120B;
+  --footer-bg:  #080E09;
+  --shadow:     0 4px 32px rgba(0,0,0,.4);
+  --shadow-lg:  0 16px 64px rgba(0,0,0,.55);
+  --parchment:  #F0E8D0;
+  --gold-pale:  #2A2210;
+  --ink2:       #D8CEAD;
+  --muted:      #A09070;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  font-family: 'Crimson Pro', Georgia, serif;
+  color: var(--text);
+  background: var(--bg);
+  overflow-x: hidden;
+  transition: background .35s, color .35s;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+h1,h2,h3,h4,h5 { font-family: 'Cinzel', 'Times New Roman', serif; line-height: 1.18; letter-spacing: .025em; }
+
+/* ─── Theme Toggle ─── */
+.theme-toggle {
+  width: 40px; height: 22px;
+  background: rgba(200,168,75,.25);
+  border: 1px solid var(--gold-d);
+  border-radius: 11px;
+  position: relative; cursor: pointer;
+  transition: background var(--tr);
+  flex-shrink: 0;
+}
+.theme-toggle::after {
+  content: '';
+  position: absolute; top: 2px; left: 2px;
+  width: 16px; height: 16px; border-radius: 50%;
+  background: var(--gold);
+  transition: transform var(--tr), background var(--tr);
+}
+[data-theme="dark"] .theme-toggle { background: rgba(200,168,75,.35); }
+[data-theme="dark"] .theme-toggle::after { transform: translateX(18px); }
+.theme-toggle-wrap {
+  display: flex; align-items: center; gap: .55rem;
+  font-family: 'Cinzel', serif; font-size: .58rem; font-weight: 600;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--nav-gold);
+  opacity: .8;
+}
+
+/* ─── Typography helpers ─── */
+.eyebrow {
+  font-family: 'Cinzel', serif; font-size: .62rem; font-weight: 600;
+  letter-spacing: .35em; text-transform: uppercase; color: var(--gold);
+  display: block; margin-bottom: .85rem;
+}
+.display-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2rem, 4.2vw, 3.2rem);
+  font-weight: 700; color: var(--forest); line-height: 1.12; margin-bottom: 1.2rem;
+  transition: color .35s;
+}
+[data-theme="dark"] .display-title { color: var(--text); }
+.display-title .accent { color: var(--gold-d); }
+[data-theme="dark"] .display-title .accent { color: var(--gold); }
+.section-sub {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem; color: var(--text-muted);
+  line-height: 1.9; max-width: 560px; font-style: italic;
+}
+.ornamental-rule {
+  display: flex; align-items: center; gap: .9rem; margin: 1.2rem 0 2rem;
+  color: var(--gold);
+}
+.ornamental-rule::before, .ornamental-rule::after {
+  content: ''; flex: 1; height: 1px; background: var(--rule);
+}
+.ornamental-rule span { font-size: .9rem; }
+.center-rule { justify-content: center; }
+.center-rule::before, .center-rule::after { max-width: 90px; }
+
+/* ─── Layout ─── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+section { padding: 110px 0; }
+
+/* ─── Buttons ─── */
+.btn-royal {
+  display: inline-block; background: var(--forest);
+  color: var(--gold-l); font-family: 'Cinzel', serif;
+  font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  padding: .9rem 2.4rem; border: 2px solid var(--forest); cursor: pointer;
+  transition: background var(--tr), color var(--tr), transform var(--tr), box-shadow var(--tr);
+}
+.btn-royal:hover {
+  background: var(--forest3); color: var(--gold);
+  transform: translateY(-2px); box-shadow: 0 6px 28px rgba(26,61,43,.38);
+}
+.btn-ghost {
+  display: inline-block; background: transparent;
+  color: rgba(240,232,208,.82); font-family: 'Cinzel', serif;
+  font-size: .7rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  padding: .88rem 2rem; border: 1px solid rgba(240,232,208,.38); cursor: pointer;
+  transition: all var(--tr);
+}
+.btn-ghost:hover { background: rgba(240,232,208,.1); border-color: rgba(240,232,208,.7); color: #fff; }
+.btn-royal-outline {
+  display: inline-block; background: transparent;
+  color: var(--forest); font-family: 'Cinzel', serif;
+  font-size: .72rem; font-weight: 600; letter-spacing: .2em; text-transform: uppercase;
+  padding: .9rem 2.4rem; border: 2px solid var(--forest); cursor: pointer;
+  transition: all var(--tr);
+}
+[data-theme="dark"] .btn-royal-outline { color: var(--gold-l); border-color: var(--gold-d); }
+.btn-royal-outline:hover { background: var(--forest); color: var(--gold-l); }
+
+/* =========================================================
+   NAVBAR
+   ========================================================= */
+#navbar {
+  position: sticky; top: 0; z-index: 999;
+  background: var(--nav-bg);
+  border-bottom: 1px solid rgba(200,168,75,.28);
+  transition: background .35s, box-shadow var(--tr);
+}
+#navbar.scrolled { box-shadow: 0 3px 40px rgba(0,0,0,.45); }
+.nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+.nav-brand { display: flex; align-items: center; gap: .9rem; }
+.nav-crest {
+  width: 42px; height: 42px;
+  background: linear-gradient(150deg, var(--gold-d), var(--gold));
+  display: flex; align-items: center; justify-content: center;
+  clip-path: polygon(50% 0%, 95% 20%, 100% 70%, 50% 100%, 0% 70%, 5% 20%);
+  font-family: 'Cinzel', serif; font-weight: 900; font-size: .9rem;
+  color: var(--forest3); flex-shrink: 0;
+}
+.nav-name-wrap { line-height: 1.1; }
+.nav-title { color: #F0E8D0; font-family: 'Cinzel', serif; font-size: .98rem; font-weight: 700; letter-spacing: .06em; }
+.nav-sub { color: var(--gold); font-family: 'Crimson Pro', serif; font-size: .7rem; letter-spacing: .15em; font-style: italic; }
+.nav-right { display: flex; align-items: center; gap: 0; }
+.nav-links { display: flex; align-items: center; gap: 0; }
+.nav-links a {
+  color: var(--nav-text); font-family: 'Cinzel', serif;
+  font-size: .62rem; font-weight: 400; letter-spacing: .14em; text-transform: uppercase;
+  padding: .5rem .85rem; transition: color var(--tr), background var(--tr);
+}
+.nav-links a:hover { color: var(--gold); background: rgba(200,168,75,.08); }
+.nav-links a + a { border-left: 1px solid rgba(200,168,75,.14); }
+.nav-links .nav-apply {
+  background: var(--gold-d); color: #F0E8D0;
+  margin-left: 1rem; padding: .5rem 1.3rem;
+  border: 1px solid var(--gold); border-left: 1px solid var(--gold);
+}
+.nav-links .nav-apply:hover { background: var(--gold); color: var(--forest3); }
+.nav-divider { width: 1px; height: 20px; background: rgba(200,168,75,.2); margin: 0 .8rem 0 1rem; }
+.nav-toggle { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: .4rem; }
+.nav-toggle span { width: 24px; height: 1.5px; background: #F0E8D0; display: block; transition: var(--tr); }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+#hero {
+  min-height: 100vh;
+  background:
+    var(--hero-over),
+    url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=1800&q=85') center/cover no-repeat;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+  padding: 100px 0 80px;
+}
+/* Heraldic diamond lattice overlay */
+#hero::before {
+  content: '';
+  position: absolute; inset: 0; pointer-events: none; z-index: 0;
+  background-image:
+    repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(200,168,75,.04) 40px, rgba(200,168,75,.04) 41px),
+    repeating-linear-gradient(-45deg, transparent, transparent 40px, rgba(200,168,75,.04) 40px, rgba(200,168,75,.04) 41px);
+}
+/* Left royal stripe */
+#hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0; bottom: 0; width: 5px; z-index: 1;
+  background: linear-gradient(180deg, transparent, var(--gold-d) 20%, var(--gold) 50%, var(--gold-d) 80%, transparent);
+}
+.hero-inner { position: relative; z-index: 2; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 1.2rem;
+  background: rgba(15,36,25,.6); backdrop-filter: blur(8px);
+  border: 1px solid rgba(200,168,75,.3); border-left: 3px solid var(--gold);
+  padding: .7rem 1.4rem; margin-bottom: 2.2rem;
+}
+.hero-badge-crest {
+  width: 56px; height: 56px;
+  background: linear-gradient(150deg, var(--gold-d), var(--gold));
+  clip-path: polygon(50% 0%, 95% 20%, 100% 70%, 50% 100%, 0% 70%, 5% 20%);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-weight: 900; font-size: 1.2rem;
+  color: var(--forest3); flex-shrink: 0;
+}
+.hero-badge-text p { color: rgba(240,232,208,.55); font-family: 'Cinzel', serif; font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; line-height: 1.9; }
+.hero-badge-text em { color: var(--gold); font-family: 'Playfair Display', serif; font-size: 1rem; font-style: italic; display: block; }
+.hero-rule {
+  width: 320px; height: 1px;
+  background: linear-gradient(90deg, var(--gold-d), var(--gold), transparent);
+  margin: 1.6rem 0;
+}
+.hero-title {
+  font-family: 'Cinzel', serif;
+  font-size: clamp(2.8rem, 6vw, 5.6rem);
+  font-weight: 900; color: #F0E8D0; line-height: .98;
+  letter-spacing: .04em; margin-bottom: .8rem;
+}
+.hero-title .gold { color: var(--gold); }
+.hero-title .italic-line {
+  font-size: clamp(1.6rem, 3.2vw, 3.2rem); font-weight: 400;
+  color: rgba(240,232,208,.65); display: block;
+  font-family: 'Playfair Display', serif; font-style: italic;
+  letter-spacing: .06em; margin-top: .5rem;
+}
+.hero-motto {
+  font-family: 'IM Fell English', serif; font-style: italic;
+  font-size: 1.25rem; color: rgba(200,168,75,.85);
+  letter-spacing: .05em; margin: 1.6rem 0 2.4rem;
+  border-left: 2px solid var(--gold-d); padding-left: 1rem;
+  max-width: 420px;
+}
+.hero-ctas { display: flex; gap: 1.2rem; flex-wrap: wrap; margin-bottom: 3.2rem; }
+.hero-pillars {
+  display: flex; gap: 2rem; flex-wrap: wrap;
+  border-top: 1px solid rgba(200,168,75,.18); padding-top: 1.8rem;
+}
+.hero-pillar { color: rgba(240,232,208,.50); font-family: 'Cinzel', serif; font-size: .58rem; letter-spacing: .16em; text-transform: uppercase; }
+.hero-pillar span { display: block; color: var(--gold-l); font-size: .6rem; margin-bottom: .2rem; }
+.hero-scroll {
+  position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: .5rem;
+  color: rgba(240,232,208,.3); font-family: 'Cinzel', serif; font-size: .52rem;
+  letter-spacing: .22em; text-transform: uppercase; cursor: pointer;
+}
+.scroll-orb {
+  width: 28px; height: 46px; border: 1px solid rgba(200,168,75,.3); border-radius: 14px;
+  display: flex; justify-content: center; padding-top: 8px;
+}
+.scroll-orb::after {
+  content: ''; width: 3px; height: 7px; background: var(--gold);
+  border-radius: 2px; animation: scrollBounce 2s infinite;
+}
+@keyframes scrollBounce { 0%,100%{transform:translateY(0);opacity:.9} 55%{transform:translateY(10px);opacity:.15} }
+
+/* =========================================================
+   ABOUT
+   ========================================================= */
+#about { background: var(--bg); transition: background .35s; }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+.portrait-frame {
+  position: relative;
+  border: 6px solid var(--bg2);
+  outline: 1px solid var(--rule); outline-offset: -12px;
+}
+.portrait-frame img { width: 100%; height: 500px; object-fit: cover; display: block; }
+.portrait-plaque {
+  position: absolute; bottom: -1.4rem; right: -1.4rem;
+  background: var(--forest); color: var(--gold-l);
+  padding: 1.3rem 1.7rem; border: 1px solid var(--gold-d);
+}
+[data-theme="dark"] .portrait-plaque { background: var(--bg2); }
+.portrait-plaque strong { display: block; font-family: 'Cinzel', serif; font-size: 2rem; font-weight: 700; color: var(--gold); line-height: 1; }
+.portrait-plaque span { font-family: 'Playfair Display', serif; font-style: italic; font-size: .9rem; color: rgba(232,222,200,.7); }
+.about-pillar-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 2.2rem; background: var(--border); }
+.about-pillar {
+  background: var(--surface); padding: 1.1rem 1.3rem;
+  border-bottom: 3px solid transparent;
+  transition: border-color var(--tr), background var(--tr);
+}
+.about-pillar:hover { background: var(--surface2); border-bottom-color: var(--gold); }
+.about-pillar-icon { font-size: 1.2rem; margin-bottom: .45rem; }
+.about-pillar p { font-family: 'Cinzel', serif; font-size: .65rem; letter-spacing: .12em; text-transform: uppercase; color: var(--forest2); font-weight: 600; }
+[data-theme="dark"] .about-pillar p { color: var(--gold-l); }
+
+/* =========================================================
+   STATS — Royal Banner
+   ========================================================= */
+#stats { background: var(--stat-bg); padding: 0; overflow: hidden; transition: background .35s; }
+.stats-band {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  border-top: 3px solid var(--gold-d); border-bottom: 3px solid var(--gold-d);
+}
+.stat-block {
+  padding: 3rem 2rem; text-align: center;
+  border-right: 1px solid rgba(200,168,75,.2);
+  position: relative;
+}
+.stat-block:last-child { border-right: none; }
+.stat-block::before {
+  content: ''; position: absolute; top: 0; left: 50%; transform: translateX(-50%);
+  width: 36px; height: 3px; background: var(--gold);
+}
+.stat-icon { font-size: 1.5rem; margin-bottom: .9rem; opacity: .75; }
+.stat-number { font-family: 'Cinzel', serif; font-size: 2.7rem; font-weight: 700; color: var(--gold); line-height: 1; margin-bottom: .4rem; }
+.stat-suffix { color: var(--gold-l); font-size: 1.5rem; }
+.stat-label { color: var(--stat-text); font-family: 'Cinzel', serif; font-size: .58rem; font-weight: 400; letter-spacing: .18em; text-transform: uppercase; margin-top: .4rem; }
+
+/* =========================================================
+   COURSES
+   ========================================================= */
+#courses { background: var(--bg2); transition: background .35s; }
+.courses-head { text-align: center; margin-bottom: 3.2rem; }
+.courses-head .section-sub { margin: 0 auto; }
+.filter-bar { display: flex; gap: .4rem; justify-content: center; flex-wrap: wrap; margin-bottom: 2.8rem; }
+.filter-btn {
+  padding: .45rem 1.2rem; border: 1px solid rgba(26,61,43,.25); background: transparent;
+  color: var(--forest2); font-family: 'Cinzel', serif; font-size: .58rem;
+  font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  cursor: pointer; transition: all var(--tr);
+}
+[data-theme="dark"] .filter-btn { color: var(--text-muted); border-color: rgba(200,168,75,.2); }
+.filter-btn:hover, .filter-btn.active { background: var(--forest); color: var(--gold-l); border-color: var(--forest); }
+.courses-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--rule); }
+.course-card { background: var(--card-bg); overflow: hidden; transition: transform var(--tr), box-shadow var(--tr); position: relative; }
+.course-card.hidden { display: none; }
+.course-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); z-index: 2; }
+.course-img { height: 150px; overflow: hidden; position: relative; }
+.course-img img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s; filter: sepia(12%) brightness(.94); }
+.course-card:hover .course-img img { transform: scale(1.06); filter: sepia(4%) brightness(1); }
+.course-dept {
+  position: absolute; top: 0; left: 0; right: 0;
+  background: linear-gradient(0deg, transparent, rgba(15,36,25,.55));
+  padding: .55rem .8rem;
+}
+.dept-badge {
+  background: var(--forest3); color: var(--gold);
+  font-family: 'Cinzel', serif; font-size: .54rem; font-weight: 600;
+  letter-spacing: .14em; text-transform: uppercase;
+  padding: .2rem .6rem; border-bottom: 2px solid var(--gold-d);
+}
+.course-body { padding: 1.4rem 1.3rem 1.5rem; border-top: 2px solid var(--rule); }
+.course-body h3 { font-family: 'Cinzel', serif; font-size: .85rem; font-weight: 600; color: var(--forest); margin-bottom: .55rem; line-height: 1.45; letter-spacing: .02em; }
+[data-theme="dark"] .course-body h3 { color: var(--text); }
+.course-body p { font-size: .95rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1rem; }
+.course-foot { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--rule); padding-top: .85rem; }
+.course-meta-item { font-family: 'Cinzel', serif; font-size: .56rem; letter-spacing: .12em; text-transform: uppercase; color: var(--text-muted); }
+.course-meta-item strong { display: block; color: var(--forest2); font-size: .66rem; }
+[data-theme="dark"] .course-meta-item strong { color: var(--gold-l); }
+
+/* =========================================================
+   ADMISSIONS
+   ========================================================= */
+#admissions { background: var(--bg); transition: background .35s; }
+.admissions-layout { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4.5rem; align-items: start; }
+.fee-table-wrap { overflow-x: auto; border: 1px solid var(--border); }
+.fee-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.fee-table thead { background: var(--forest3); }
+.fee-table thead th {
+  padding: .9rem 1rem; text-align: left;
+  font-family: 'Cinzel', serif; font-weight: 600; font-size: .58rem;
+  letter-spacing: .15em; text-transform: uppercase;
+  color: var(--gold-l); cursor: pointer; user-select: none;
+  white-space: nowrap; transition: background var(--tr);
+  border-right: 1px solid rgba(200,168,75,.18);
+}
+.fee-table thead th:last-child { border-right: none; }
+.fee-table thead th:hover { background: var(--forest2); }
+.fee-table thead th .sort-icon { margin-left: .35rem; color: var(--gold); font-size: .62rem; }
+.fee-table tbody tr { border-bottom: 1px solid var(--rule); }
+.fee-table tbody tr:nth-child(even) { background: var(--bg2); }
+.fee-table tbody tr:nth-child(odd) { background: var(--surface); }
+.fee-table tbody tr:hover { background: rgba(200,168,75,.09); }
+.fee-table td { padding: .8rem 1rem; color: var(--text2); vertical-align: middle; font-family: 'Crimson Pro', serif; font-size: .96rem; border-right: 1px solid var(--rule); }
+.fee-table td:last-child { border-right: none; }
+.fee-table td:nth-child(3) { font-weight: 600; color: var(--forest); font-family: 'Cinzel', serif; font-size: .8rem; }
+[data-theme="dark"] .fee-table td:nth-child(3) { color: var(--gold-l); }
+.seats-badge { display: inline-block; padding: .18rem .55rem; font-family: 'Cinzel', serif; font-size: .58rem; letter-spacing: .08em; font-weight: 700; }
+.seats-high { background: rgba(46,112,82,.15); color: #2E7052; border: 1px solid rgba(46,112,82,.35); }
+.seats-med  { background: rgba(200,168,75,.15); color: #7A5A10; border: 1px solid rgba(200,168,75,.4); }
+.seats-low  { background: rgba(160,60,50,.12); color: #7a2020; border: 1px solid rgba(160,60,50,.3); }
+[data-theme="dark"] .seats-high { color: #6EC29C; background: rgba(46,112,82,.25); }
+[data-theme="dark"] .seats-med  { color: var(--gold-l); background: rgba(200,168,75,.18); }
+[data-theme="dark"] .seats-low  { color: #D98080; background: rgba(160,60,50,.2); }
+.apply-panel h3 { font-family: 'Cinzel', serif; font-size: 1.35rem; color: var(--forest); margin-bottom: .9rem; }
+[data-theme="dark"] .apply-panel h3 { color: var(--text); }
+.apply-panel > p { font-family: 'Crimson Pro', serif; font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
+.apply-steps { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; border: 1px solid var(--border); }
+.apply-step { display: flex; gap: 1.1rem; align-items: flex-start; padding: .95rem 1.1rem; border-bottom: 1px solid var(--rule); transition: background var(--tr); }
+.apply-step:last-child { border-bottom: none; }
+.apply-step:hover { background: var(--bg2); }
+.step-num {
+  min-width: 26px; height: 26px; background: var(--forest);
+  color: var(--gold); display: flex; align-items: center; justify-content: center;
+  font-family: 'Cinzel', serif; font-size: .72rem; font-weight: 700; flex-shrink: 0;
+}
+.step-text { font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--text2); padding-top: 3px; line-height: 1.6; }
+
+/* Modal */
+.modal-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(8,18,10,.9); backdrop-filter: blur(5px); align-items: center; justify-content: center; }
+.modal-overlay.open { display: flex; }
+.modal-box {
+  background: var(--surface); border: 1px solid var(--border);
+  padding: 2.6rem; width: 100%; max-width: 490px;
+  position: relative; max-height: 90vh; overflow-y: auto;
+  box-shadow: var(--shadow-lg); animation: modalIn .3s ease;
+}
+@keyframes modalIn { from{transform:scale(.95);opacity:0} to{transform:scale(1);opacity:1} }
+.modal-box::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--forest3), var(--gold), var(--forest3));
+}
+.modal-close {
+  position: absolute; top: .9rem; right: .9rem; background: transparent;
+  border: 1px solid var(--border); width: 28px; height: 28px; font-size: .85rem;
+  cursor: pointer; color: var(--text-muted); transition: all var(--tr);
+  display: flex; align-items: center; justify-content: center;
+}
+.modal-close:hover { background: var(--forest); color: var(--gold); border-color: var(--forest); }
+.modal-box h3 { font-family: 'Cinzel', serif; font-size: 1.3rem; color: var(--forest); margin-bottom: 1.4rem; }
+[data-theme="dark"] .modal-box h3 { color: var(--text); }
+.form-group { margin-bottom: 1rem; }
+.form-group label { display: block; font-family: 'Cinzel', serif; font-size: .6rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--forest2); margin-bottom: .4rem; }
+[data-theme="dark"] .form-group label { color: var(--gold-l); }
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; padding: .72rem .95rem;
+  border: 1px solid var(--border); background: var(--bg);
+  font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--text);
+  transition: border-color var(--tr); border-radius: 0;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus { outline: none; border-color: var(--gold-d); box-shadow: 0 0 0 2px rgba(200,168,75,.14); }
+.form-error { font-family: 'Crimson Pro', serif; font-size: .86rem; color: #8B2020; margin-top: .3rem; display: none; }
+.form-error.show { display: block; }
+[data-theme="dark"] .form-error { color: #D48080; }
+.form-success { background: rgba(46,112,82,.12); color: #2E7052; border: 1px solid rgba(46,112,82,.3); padding: .9rem; text-align: center; display: none; margin-top: 1rem; font-family: 'Crimson Pro', serif; font-size: 1rem; }
+[data-theme="dark"] .form-success { color: #6EC29C; }
+
+/* =========================================================
+   FACILITIES
+   ========================================================= */
+#facilities { background: var(--fac-bg); overflow: hidden; transition: background .35s; }
+#facilities .display-title { color: #F0E8D0; }
+[data-theme="dark"] #facilities .display-title { color: var(--text); }
+.facilities-head { text-align: center; margin-bottom: 3.8rem; }
+.facilities-sub { color: rgba(240,232,208,.48); margin: 0 auto; }
+.facilities-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(200,168,75,.18); }
+.facility-card {
+  background: var(--fac-card); padding: 2.3rem 1.9rem;
+  border-bottom: 3px solid transparent;
+  transition: background var(--tr), border-color var(--tr); position: relative; overflow: hidden;
+}
+.facility-card::before {
+  content: ''; position: absolute; top: 0; left: 0; width: 3px; height: 0;
+  background: var(--gold); transition: height .5s ease;
+}
+.facility-card:hover { background: rgba(240,232,208,.07); }
+.facility-card:hover::before { height: 100%; }
+.facility-icon { font-size: 1.9rem; margin-bottom: 1rem; opacity: .7; }
+.facility-card h3 { font-family: 'Cinzel', serif; font-size: .92rem; font-weight: 600; color: #F0E8D0; margin-bottom: .65rem; letter-spacing: .04em; }
+.facility-card p { font-family: 'Crimson Pro', serif; font-size: 1rem; color: rgba(240,232,208,.48); line-height: 1.75; }
+
+/* =========================================================
+   GALLERY
+   ========================================================= */
+#gallery { background: var(--bg2); transition: background .35s; }
+.gallery-head { text-align: center; margin-bottom: 3.2rem; }
+.gallery-grid { display: grid; grid-template-columns: repeat(3,1fr); grid-template-rows: 220px 220px; gap: 3px; }
+.gallery-item { overflow: hidden; position: relative; cursor: pointer; }
+.gallery-item:first-child { grid-column: 1/2; grid-row: 1/3; }
+.gallery-item:nth-child(5) { grid-column: 3/4; grid-row: 1/3; }
+.gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .6s, filter .5s; filter:sepia(18%) brightness(.92); }
+.gallery-item:hover img { transform:scale(1.07); filter:sepia(4%) brightness(1.02); }
+.gallery-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(0deg, rgba(15,36,25,.8) 0%, transparent 55%);
+  display:flex; align-items:flex-end; padding:1.1rem;
+  opacity:0; transition:opacity var(--tr);
+}
+.gallery-item:hover .gallery-overlay { opacity:1; }
+.gallery-overlay span { color:var(--gold-l); font-family:'Cinzel',serif; font-size:.62rem; letter-spacing:.15em; text-transform:uppercase; }
+/* Lightbox */
+.lightbox { display:none; position:fixed; inset:0; z-index:3000; background:rgba(5,12,6,.96); backdrop-filter:blur(8px); align-items:center; justify-content:center; }
+.lightbox.open { display:flex; }
+.lightbox-inner { position:relative; max-width:88vw; max-height:90vh; }
+.lightbox-inner img { max-width:88vw; max-height:84vh; object-fit:contain; border:3px solid var(--gold-d); box-shadow:0 32px 80px rgba(0,0,0,.6); }
+.lb-close { position:absolute; top:-1.3rem; right:-1.3rem; background:var(--gold); color:var(--forest3); border:none; width:32px; height:32px; font-size:.85rem; cursor:pointer; font-weight:700; transition:background var(--tr); display:flex; align-items:center; justify-content:center; }
+.lb-close:hover { background:var(--gold-l); }
+.lb-caption { color:rgba(240,232,208,.55); text-align:center; margin-top:.8rem; font-family:'Playfair Display',serif; font-style:italic; font-size:.95rem; }
+.lb-nav { position:absolute; top:50%; transform:translateY(-50%); background:var(--gold-d); color:#F0E8D0; border:none; width:36px; height:36px; font-size:1.1rem; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background var(--tr); }
+.lb-nav:hover { background:var(--gold); }
+.lb-prev { left:-2.6rem; }
+.lb-next { right:-2.6rem; }
+
+/* =========================================================
+   CONTACT
+   ========================================================= */
+#contact { background: var(--bg); transition: background .35s; }
+.contact-grid { display: grid; grid-template-columns: 1fr 1.4fr; gap: 4.5rem; }
+.contact-info-panel h3 { font-family: 'Cinzel', serif; font-size: 1.25rem; color: var(--forest); margin-bottom: .9rem; }
+[data-theme="dark"] .contact-info-panel h3 { color: var(--text); }
+.contact-info-panel > p { font-family: 'Crimson Pro', serif; font-size: 1.05rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 1.8rem; font-style: italic; }
+.contact-items { display: flex; flex-direction: column; gap: 0; margin-bottom: 1.4rem; border: 1px solid var(--border); }
+.contact-item { display: flex; gap: .9rem; align-items: flex-start; padding: .9rem 1rem; border-bottom: 1px solid var(--rule); }
+.contact-item:last-child { border-bottom: none; }
+.ci-icon { min-width: 34px; height: 34px; background: var(--forest3); display: flex; align-items: center; justify-content: center; font-size: .95rem; flex-shrink: 0; }
+.ci-label { font-family: 'Cinzel', serif; font-size: .56rem; letter-spacing: .15em; text-transform: uppercase; color: var(--gold-d); margin-bottom: .18rem; }
+.ci-value { font-family: 'Crimson Pro', serif; font-size: .96rem; color: var(--text2); }
+.map-placeholder { width: 100%; height: 195px; border: none; border: 1px solid var(--border); display: block; }
+.contact-form-panel {
+  background: var(--surface2); border: 1px solid var(--border);
+  padding: 2.4rem; position: relative;
+}
+.contact-form-panel::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--forest3), var(--gold), var(--forest3));
+}
+.contact-form-panel h3 { font-family: 'Cinzel', serif; font-size: 1.15rem; color: var(--forest); margin-bottom: 1.4rem; }
+[data-theme="dark"] .contact-form-panel h3 { color: var(--text); }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.contact-submit {
+  background: var(--forest); color: var(--gold-l);
+  font-family: 'Cinzel', serif; font-size: .68rem; font-weight: 600;
+  letter-spacing: .18em; text-transform: uppercase;
+  padding: .88rem 2rem; border: 2px solid var(--forest);
+  cursor: pointer; transition: all var(--tr); width: 100%; margin-top: .5rem;
+}
+.contact-submit:hover { background: var(--forest3); border-color: var(--forest3); color: var(--gold); transform: translateY(-2px); }
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer { background: var(--footer-bg); color: rgba(240,232,208,.42); padding: 65px 0 28px; transition: background .35s; }
+.footer-top-rule { height: 1px; background: linear-gradient(90deg, transparent, var(--gold-d), transparent); margin-bottom: 55px; }
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1.5fr; gap: 3rem; margin-bottom: 2.8rem; }
+.footer-brand .nav-title { color: #F0E8D0; font-size: 1.15rem; }
+.footer-brand .nav-sub { display: block; margin-bottom: .9rem; }
+.footer-brand p { font-family: 'Crimson Pro', serif; font-size: .96rem; line-height: 1.85; max-width: 275px; font-style: italic; }
+.footer-col h4 { font-family: 'Cinzel', serif; color: var(--gold); font-size: .6rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; margin-bottom: 1.1rem; padding-bottom: .55rem; border-bottom: 1px solid rgba(200,168,75,.18); }
+.footer-col ul li { margin-bottom: .6rem; }
+.footer-col ul li a { font-family: 'Crimson Pro', serif; font-size: .97rem; color: rgba(240,232,208,.46); transition: color var(--tr); }
+.footer-col ul li a:hover { color: var(--gold-l); }
+.footer-bottom { border-top: 1px solid rgba(240,232,208,.07); padding-top: 1.4rem; display: flex; justify-content: space-between; align-items: center; font-family: 'Cinzel', serif; font-size: .58rem; letter-spacing: .1em; }
+.footer-bottom a { color: var(--gold); }
+
+/* =========================================================
+   SCROLL-TO-TOP
+   ========================================================= */
+#scroll-top {
+  position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+  background: var(--gold); color: var(--forest3); border: none;
+  width: 42px; height: 42px; font-size: .95rem; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(200,168,75,.38); display: none; align-items: center; justify-content: center;
+  transition: transform var(--tr); font-family: 'Cinzel', serif; font-weight: 700;
+}
+#scroll-top.visible { display: flex; }
+#scroll-top:hover { transform: translateY(-3px); }
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+@media (max-width: 1024px) {
+  .stats-band { grid-template-columns: repeat(2,1fr); }
+  .courses-grid { grid-template-columns: repeat(2,1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; flex-direction: column; gap: 0; position: absolute; top: 68px; left: 0; right: 0; background: var(--nav-bg); border-bottom: 2px solid var(--gold-d); }
+  .nav-links.open { display: flex; }
+  .nav-links a { border-right: none !important; border-bottom: 1px solid rgba(200,168,75,.14) !important; padding: .75rem 1.2rem; }
+  .nav-divider { display: none; }
+  .theme-toggle-wrap { padding: .75rem 1.2rem; }
+  .nav-toggle { display: flex; }
+  .about-grid, .admissions-layout, .contact-grid { grid-template-columns: 1fr; }
+  .courses-grid { grid-template-columns: 1fr; background: none; gap: 3px; }
+  .facilities-grid { grid-template-columns: repeat(2,1fr); }
+  .gallery-grid { grid-template-columns: repeat(2,1fr); grid-template-rows: auto; }
+  .gallery-item:first-child, .gallery-item:nth-child(5) { grid-column: auto; grid-row: auto; }
+  .form-row { grid-template-columns: 1fr; }
+  .footer-grid { grid-template-columns: 1fr; }
+  .lb-prev { left: -1.5rem; } .lb-next { right: -1.5rem; }
+}
+@media (max-width: 480px) {
+  .stats-band { grid-template-columns: 1fr 1fr; }
+  .facilities-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav id="navbar">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-brand">
+        <div class="nav-crest">AU</div>
+        <div class="nav-name-wrap">
+          <div class="nav-title">Aurevia University</div>
+          <div class="nav-sub">Est. 1985 &nbsp;·&nbsp; NAAC A++ Accredited</div>
+        </div>
+      </a>
+      <div class="nav-right" id="navLinks">
+        <div class="nav-links">
+          <a href="#about">About</a>
+          <a href="#courses">Courses</a>
+          <a href="#facilities">Facilities</a>
+          <a href="#admissions">Admissions</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+          <a href="#admissions" class="nav-apply">Apply Now</a>
+        </div>
+        <div class="nav-divider"></div>
+        <div class="theme-toggle-wrap">
+          <span id="themeLabel">☀</span>
+          <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light mode"></button>
+        </div>
+      </div>
+      <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <div class="hero-badge-crest">AU</div>
+        <div class="hero-badge-text">
+          <p>Ranked No. 1 in South India · 2026</p>
+          <em>"Lux et Veritas — Light and Truth"</em>
+        </div>
+      </div>
+      <div class="hero-rule"></div>
+      <h1 class="hero-title">
+        Lighting the
+        <span class="gold"> Way</span>
+        <span class="italic-line">to Excellence</span>
+      </h1>
+      <p class="hero-motto">Cultivating exceptional minds since 1985</p>
+      <div class="hero-ctas">
+        <a href="#admissions" class="btn-royal">Apply for 2025–26</a>
+        <a href="#courses" class="btn-ghost">Explore Programmes</a>
+      </div>
+      <div class="hero-pillars">
+        <div class="hero-pillar"><span>✦</span>Established 1985</div>
+        <div class="hero-pillar"><span>✦</span>NAAC A++ Accredited</div>
+        <div class="hero-pillar"><span>✦</span>300+ Acres Campus</div>
+        <div class="hero-pillar"><span>✦</span>98% Placement Rate</div>
+        <div class="hero-pillar"><span>✦</span>18,500+ Students</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll"><div class="scroll-orb"></div>Descend</div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="portrait-frame">
+          <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?w=900&q=80" alt="Aurevia University Main Building" />
+        </div>
+        <div class="portrait-plaque">
+          <strong>41+</strong>
+          <span>Years of Academic Excellence</span>
+        </div>
+      </div>
+      <div class="about-text">
+        <span class="eyebrow">Our Heritage</span>
+        <h2 class="display-title">A Legacy of <span class="accent">Excellence</span></h2>
+        <div class="ornamental-rule"><span>✦</span></div>
+        <p style="font-family:'Crimson Pro',serif;font-size:1.1rem;color:var(--text-muted);line-height:1.85;margin-bottom:1rem;">
+          Founded in 1985 by visionary educators, Aurevia University began as a small liberal arts college
+          and has since grown into one of South India's most respected institutions of higher learning.
+        </p>
+        <p style="font-family:'Crimson Pro',serif;font-size:1.1rem;color:var(--text-muted);line-height:1.85;margin-bottom:2rem;">
+          Today, we offer over 48 undergraduate and postgraduate programmes across Engineering, Arts,
+          Commerce, and Sciences — with a faculty-to-student ratio that ensures every learner receives
+          the guidance they deserve.
+        </p>
+        <div class="about-pillar-grid">
+          <div class="about-pillar"><div class="about-pillar-icon">🏆</div><p>NAAC A++ Accredited</p></div>
+          <div class="about-pillar"><div class="about-pillar-icon">🌍</div><p>Global Alumni Network</p></div>
+          <div class="about-pillar"><div class="about-pillar-icon">🔬</div><p>100+ Research Labs</p></div>
+          <div class="about-pillar"><div class="about-pillar-icon">🤝</div><p>250+ Industry Partners</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section id="stats">
+  <div class="stats-band">
+    <div class="stat-block">
+      <div class="stat-icon">🎓</div>
+      <div class="stat-number"><span class="counter" data-target="18500">0</span><span class="stat-suffix">+</span></div>
+      <div class="stat-label">Total Students</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-icon">📚</div>
+      <div class="stat-number"><span class="counter" data-target="48">0</span></div>
+      <div class="stat-label">Courses Offered</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-icon">⭐</div>
+      <div class="stat-number"><span class="counter" data-target="41">0</span></div>
+      <div class="stat-label">Years of Excellence</div>
+    </div>
+    <div class="stat-block">
+      <div class="stat-icon">💼</div>
+      <div class="stat-number"><span class="counter" data-target="98">0</span><span class="stat-suffix">%</span></div>
+      <div class="stat-label">Placement Rate</div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSES -->
+<section id="courses">
+  <div class="container">
+    <div class="courses-head">
+      <span class="eyebrow">Academic Programmes</span>
+      <h2 class="display-title">Explore Our <span class="accent">Courses</span></h2>
+      <div class="ornamental-rule center-rule"><span>✦</span></div>
+      <p class="section-sub">Discover world-class programmes designed to meet the demands of a rapidly evolving global economy.</p>
+    </div>
+    <div class="filter-bar">
+      <button class="filter-btn active" data-filter="all">All Programmes</button>
+      <button class="filter-btn" data-filter="engineering">Engineering</button>
+      <button class="filter-btn" data-filter="arts">Arts &amp; Science</button>
+      <button class="filter-btn" data-filter="commerce">Commerce</button>
+      <button class="filter-btn" data-filter="science">Science</button>
+      <button class="filter-btn" data-filter="health">Health Science</button>
+      <button class="filter-btn" data-filter="law">Law</button>
+      <button class="filter-btn" data-filter="management">Management</button>
+      <button class="filter-btn" data-filter="design">Design</button>
+      <button class="filter-btn" data-filter="technology">Technology</button>
+    </div>
+    <div class="courses-grid" id="coursesGrid">
+      <!-- ENGINEERING -->
+      <div class="course-card" data-category="engineering"><div class="course-img"><img src="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=400&h=200&fit=crop&q=80" alt="CSE"/><div class="course-dept"><span class="dept-badge">Engineering</span></div></div><div class="course-body"><h3>B.Tech Computer Science &amp; Engineering</h3><p>Master algorithms, AI, machine learning, and software systems with hands-on project-based learning.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>120 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="engineering"><div class="course-img"><img src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=400&h=200&fit=crop&q=80" alt="ECE"/><div class="course-dept"><span class="dept-badge">Engineering</span></div></div><div class="course-body"><h3>B.Tech Electronics &amp; Communication</h3><p>Signal processing, embedded systems, and VLSI design taught by industry-leading faculty.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>60 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="engineering"><div class="course-img"><img src="https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?w=400&h=200&fit=crop&q=80" alt="Mech"/><div class="course-dept"><span class="dept-badge">Engineering</span></div></div><div class="course-body"><h3>B.Tech Mechanical Engineering</h3><p>Design machines, manufacturing systems, and industrial technologies with precision.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>90 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="engineering"><div class="course-img"><img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=400&h=200&fit=crop&q=80" alt="Civil"/><div class="course-dept"><span class="dept-badge">Engineering</span></div></div><div class="course-body"><h3>B.Tech Civil Engineering</h3><p>Build expertise in infrastructure, construction, transportation, and structural design.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>80 Seats</strong>Intake</div></div></div></div>
+      <!-- COMMERCE -->
+      <div class="course-card" data-category="commerce"><div class="course-img"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=200&fit=crop&q=80" alt="BCom"/><div class="course-dept"><span class="dept-badge">Commerce</span></div></div><div class="course-body"><h3>B.Com (Hons.) Accounting &amp; Finance</h3><p>A rigorous foundation in accounting, taxation, and corporate finance aligned with CA/CMA pathways.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>100 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="commerce"><div class="course-img"><img src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=200&fit=crop&q=80" alt="BCom2"/><div class="course-dept"><span class="dept-badge">Commerce</span></div></div><div class="course-body"><h3>B.Com Accounting &amp; Finance</h3><p>Build expertise in accounting, taxation, auditing, finance, and business management.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>120 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="commerce"><div class="course-img"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=200&fit=crop&q=80" alt="MBA"/><div class="course-dept"><span class="dept-badge">Commerce</span></div></div><div class="course-body"><h3>MBA (Dual Specialisation)</h3><p>Two-year postgraduate MBA with specialisations in Finance, Marketing, HR, and Operations.</p><div class="course-foot"><div class="course-meta-item"><strong>2 Years</strong>Duration</div><div class="course-meta-item"><strong>60 Seats</strong>Intake</div></div></div></div>
+      <!-- ARTS -->
+      <div class="course-card" data-category="arts"><div class="course-img"><img src="https://images.unsplash.com/photo-1503428593586-e225b39bddfe?w=400&h=200&fit=crop&q=80" alt="Media"/><div class="course-dept"><span class="dept-badge">Arts &amp; Science</span></div></div><div class="course-body"><h3>B.A. Media &amp; Journalism</h3><p>Journalism, digital content, broadcast media, and PR with active newsroom placements.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>40 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="arts"><div class="course-img"><img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=400&h=200&fit=crop&q=80" alt="English"/><div class="course-dept"><span class="dept-badge">Arts &amp; Humanities</span></div></div><div class="course-body"><h3>B.A. English Literature</h3><p>Study classic and contemporary literature, creative writing, and critical analysis.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>50 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="arts"><div class="course-img"><img src="https://images.unsplash.com/photo-1576086213369-97a306d36557?w=400&h=200&fit=crop&q=80" alt="Psych"/><div class="course-dept"><span class="dept-badge">Arts &amp; Science</span></div></div><div class="course-body"><h3>B.A. Psychology</h3><p>Understand human behavior, mental health, counseling, and psychological research methods.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>45 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="arts"><div class="course-img"><img src="https://images.unsplash.com/photo-1461360370896-922624d12aa1?w=400&h=200&fit=crop&q=80" alt="History"/><div class="course-dept"><span class="dept-badge">Arts &amp; Humanities</span></div></div><div class="course-body"><h3>B.A. History</h3><p>Explore civilizations, historical events, and cultural heritage from around the world.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>50 Seats</strong>Intake</div></div></div></div>
+      <!-- SCIENCE -->
+      <div class="course-card" data-category="science"><div class="course-img"><img src="https://images.unsplash.com/photo-1636466497217-26a8cbeaf0aa?w=400&h=200&fit=crop&q=80" alt="Physics"/><div class="course-dept"><span class="dept-badge">Science</span></div></div><div class="course-body"><h3>B.Sc. Physics</h3><p>Explore mechanics, electronics, optics, and modern physics with laboratory experience.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>60 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="science"><div class="course-img"><img src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=400&h=200&fit=crop&q=80" alt="Chemistry"/><div class="course-dept"><span class="dept-badge">Science</span></div></div><div class="course-body"><h3>B.Sc. Chemistry</h3><p>Learn analytical, organic, and industrial chemistry through hands-on experiments.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>60 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="science"><div class="course-img"><img src="https://images.unsplash.com/photo-1614935151651-0bea6508db6b?w=400&h=200&fit=crop&q=80" alt="Biotech"/><div class="course-dept"><span class="dept-badge">Science</span></div></div><div class="course-body"><h3>B.Sc. Biotechnology</h3><p>Study genetics, molecular biology, and innovative biotechnology applications.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>50 Seats</strong>Intake</div></div></div></div>
+      <!-- TECHNOLOGY -->
+      <div class="course-card" data-category="technology"><div class="course-img"><img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=400&h=200&fit=crop&q=80" alt="CS"/><div class="course-dept"><span class="dept-badge">Technology</span></div></div><div class="course-body"><h3>B.Sc. Computer Science</h3><p>Master programming, software development, databases, AI, and cybersecurity.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>80 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="technology"><div class="course-img"><img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=200&fit=crop&q=80" alt="IT"/><div class="course-dept"><span class="dept-badge">Technology</span></div></div><div class="course-body"><h3>B.Sc. Information Technology</h3><p>Gain expertise in networking, cloud computing, web development, and IT infrastructure.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>70 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="technology"><div class="course-img"><img src="https://images.unsplash.com/photo-1677442135703-1787eea5ce01?w=400&h=200&fit=crop&q=80" alt="AI"/><div class="course-dept"><span class="dept-badge">Technology</span></div></div><div class="course-body"><h3>B.Tech Artificial Intelligence</h3><p>Learn machine learning, data science, neural networks, and intelligent systems.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>60 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="technology"><div class="course-img"><img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?w=400&h=200&fit=crop&q=80" alt="Cyber"/><div class="course-dept"><span class="dept-badge">Technology</span></div></div><div class="course-body"><h3>B.Tech Cyber Security</h3><p>Protect digital systems through ethical hacking, network security, and cyber defense.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>50 Seats</strong>Intake</div></div></div></div>
+      <!-- HEALTH -->
+      <div class="course-card" data-category="health"><div class="course-img"><img src="https://images.unsplash.com/photo-1631217868264-e5b90bb7e133?w=400&h=200&fit=crop&q=80" alt="Nursing"/><div class="course-dept"><span class="dept-badge">Health Sciences</span></div></div><div class="course-body"><h3>B.Sc. Nursing</h3><p>Prepare for healthcare careers through clinical practice and patient-centered care.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>100 Seats</strong>Intake</div></div></div></div>
+      <!-- LAW -->
+      <div class="course-card" data-category="law"><div class="course-img"><img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=200&fit=crop&q=80" alt="Law"/><div class="course-dept"><span class="dept-badge">Law</span></div></div><div class="course-body"><h3>B.A. LL.B.</h3><p>Develop legal knowledge, advocacy skills, and expertise in constitutional law.</p><div class="course-foot"><div class="course-meta-item"><strong>5 Years</strong>Duration</div><div class="course-meta-item"><strong>60 Seats</strong>Intake</div></div></div></div>
+      <!-- MANAGEMENT -->
+      <div class="course-card" data-category="management"><div class="course-img"><img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=200&fit=crop&q=80" alt="BBA"/><div class="course-dept"><span class="dept-badge">Management</span></div></div><div class="course-body"><h3>B.B.A. Business Administration</h3><p>Develop leadership, marketing, entrepreneurship, and business strategy skills.</p><div class="course-foot"><div class="course-meta-item"><strong>3 Years</strong>Duration</div><div class="course-meta-item"><strong>100 Seats</strong>Intake</div></div></div></div>
+      <div class="course-card" data-category="management"><div class="course-img"><img src="https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=200&fit=crop&q=80" alt="MBA2"/><div class="course-dept"><span class="dept-badge">Management</span></div></div><div class="course-body"><h3>M.B.A. Business Management</h3><p>Advance your career with strategic leadership, finance, and entrepreneurship skills.</p><div class="course-foot"><div class="course-meta-item"><strong>2 Years</strong>Duration</div><div class="course-meta-item"><strong>120 Seats</strong>Intake</div></div></div></div>
+      <!-- DESIGN -->
+      <div class="course-card" data-category="design"><div class="course-img"><img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=400&h=200&fit=crop&q=80" alt="Design"/><div class="course-dept"><span class="dept-badge">Design</span></div></div><div class="course-body"><h3>B.Des. Graphic Design</h3><p>Create visual identities, digital experiences, and innovative design solutions.</p><div class="course-foot"><div class="course-meta-item"><strong>4 Years</strong>Duration</div><div class="course-meta-item"><strong>40 Seats</strong>Intake</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ADMISSIONS -->
+<section id="admissions">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3.2rem;">
+      <span class="eyebrow">Admissions 2025–26</span>
+      <h2 class="display-title">Fee Structure &amp; <span class="accent">Seats</span></h2>
+      <div class="ornamental-rule center-rule"><span>✦</span></div>
+    </div>
+    <div class="admissions-layout">
+      <div class="fee-table-wrap">
+        <table class="fee-table" id="feeTable">
+          <thead>
+            <tr>
+              <th data-col="0">Programme <span class="sort-icon">⇅</span></th>
+              <th data-col="1">Duration <span class="sort-icon">⇅</span></th>
+              <th data-col="2">Annual Fee <span class="sort-icon">⇅</span></th>
+              <th data-col="3">Seats <span class="sort-icon">⇅</span></th>
+            </tr>
+          </thead>
+          <tbody id="feeTableBody">
+            <tr><td>B.Tech Computer Science &amp; Engineering</td><td>4 Years</td><td>₹1,85,000</td><td><span class="seats-badge seats-low">120</span></td></tr>
+            <tr><td>B.Tech Mechanical Engineering</td><td>4 Years</td><td>₹1,70,000</td><td><span class="seats-badge seats-med">90</span></td></tr>
+            <tr><td>B.Tech Electronics &amp; Communication</td><td>4 Years</td><td>₹1,75,000</td><td><span class="seats-badge seats-high">60</span></td></tr>
+            <tr><td>B.Tech Artificial Intelligence</td><td>4 Years</td><td>₹2,00,000</td><td><span class="seats-badge seats-high">60</span></td></tr>
+            <tr><td>B.Tech Cyber Security</td><td>4 Years</td><td>₹1,95,000</td><td><span class="seats-badge seats-high">50</span></td></tr>
+            <tr><td>B.Tech Civil Engineering</td><td>4 Years</td><td>₹1,65,000</td><td><span class="seats-badge seats-med">80</span></td></tr>
+            <tr><td>B.Sc Computer Science</td><td>3 Years</td><td>₹1,10,000</td><td><span class="seats-badge seats-med">80</span></td></tr>
+            <tr><td>B.Sc Information Technology</td><td>3 Years</td><td>₹1,15,000</td><td><span class="seats-badge seats-med">70</span></td></tr>
+            <tr><td>B.Sc Physics</td><td>3 Years</td><td>₹85,000</td><td><span class="seats-badge seats-high">60</span></td></tr>
+            <tr><td>B.Sc Chemistry</td><td>3 Years</td><td>₹85,000</td><td><span class="seats-badge seats-high">60</span></td></tr>
+            <tr><td>B.Sc Biotechnology</td><td>3 Years</td><td>₹90,000</td><td><span class="seats-badge seats-high">50</span></td></tr>
+            <tr><td>B.Sc Nursing</td><td>4 Years</td><td>₹1,25,000</td><td><span class="seats-badge seats-low">100</span></td></tr>
+            <tr><td>B.A. Psychology</td><td>3 Years</td><td>₹75,000</td><td><span class="seats-badge seats-high">60</span></td></tr>
+            <tr><td>B.A. Media &amp; Journalism</td><td>3 Years</td><td>₹80,000</td><td><span class="seats-badge seats-high">40</span></td></tr>
+            <tr><td>B.A. English Literature</td><td>3 Years</td><td>₹65,000</td><td><span class="seats-badge seats-high">50</span></td></tr>
+            <tr><td>B.A. History</td><td>3 Years</td><td>₹65,000</td><td><span class="seats-badge seats-high">50</span></td></tr>
+            <tr><td>B.A. LL.B.</td><td>5 Years</td><td>₹1,50,000</td><td><span class="seats-badge seats-high">60</span></td></tr>
+            <tr><td>B.B.A. Business Administration</td><td>3 Years</td><td>₹90,000</td><td><span class="seats-badge seats-low">100</span></td></tr>
+            <tr><td>B.Com (Hons.) Accounting &amp; Finance</td><td>3 Years</td><td>₹70,000</td><td><span class="seats-badge seats-low">100</span></td></tr>
+            <tr><td>B.Com Accounting &amp; Finance</td><td>3 Years</td><td>₹75,000</td><td><span class="seats-badge seats-low">120</span></td></tr>
+            <tr><td>B.Des Graphic Design</td><td>4 Years</td><td>₹1,40,000</td><td><span class="seats-badge seats-high">40</span></td></tr>
+            <tr><td>MBA (Dual Specialisation)</td><td>2 Years</td><td>₹2,20,000</td><td><span class="seats-badge seats-high">60</span></td></tr>
+            <tr><td>M.B.A. Business Management</td><td>2 Years</td><td>₹2,20,000</td><td><span class="seats-badge seats-low">120</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="apply-panel">
+        <h3>How to Apply</h3>
+        <p>Applications for the 2025–26 academic year are now open. Complete the steps below and our admissions office will guide you through the process.</p>
+        <div class="apply-steps">
+          <div class="apply-step"><div class="step-num">I</div><div class="step-text">Fill the online application form with your academic details</div></div>
+          <div class="apply-step"><div class="step-num">II</div><div class="step-text">Upload required documents — mark sheets and identity proof</div></div>
+          <div class="apply-step"><div class="step-num">III</div><div class="step-text">Appear for the Aurevia Entrance Examination (AEE)</div></div>
+          <div class="apply-step"><div class="step-num">IV</div><div class="step-text">Attend the personal interview and counselling session</div></div>
+          <div class="apply-step"><div class="step-num">V</div><div class="step-text">Pay the admission fee and confirm your seat</div></div>
+        </div>
+        <button class="btn-royal" onclick="openModal()">Begin Your Application →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Application Modal -->
+<div class="modal-overlay" id="applyModal">
+  <div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <h3 id="modalTitle">Apply to Aurevia University</h3>
+    <form id="applyForm" novalidate>
+      <div class="form-group"><label for="appName">Full Name *</label><input type="text" id="appName" placeholder="e.g. Anugraha Saji" /><div class="form-error" id="appNameErr">Please enter your full name.</div></div>
+      <div class="form-group"><label for="appEmail">Email Address *</label><input type="email" id="appEmail" placeholder="you@example.com" /><div class="form-error" id="appEmailErr">Please enter a valid email address.</div></div>
+      <div class="form-group"><label for="appPhone">Phone Number *</label><input type="tel" id="appPhone" placeholder="+91 98765 43210" /><div class="form-error" id="appPhoneErr">Please enter a valid phone number.</div></div>
+      <div class="form-group">
+        <label for="appCourse">Programme of Interest *</label>
+        <select id="appCourse"><option value="">Select a programme…</option><option>B.Tech Computer Science &amp; Engineering</option><option>B.Tech Mechanical Engineering</option><option>B.Tech Electronics &amp; Communication</option><option>B.Tech Artificial Intelligence</option><option>B.Tech Cyber Security</option><option>B.Tech Civil Engineering</option><option>B.Sc Physics</option><option>B.Sc Chemistry</option><option>B.Sc Computer Science</option><option>B.Sc Information Technology</option><option>B.Sc Biotechnology</option><option>B.Sc Nursing</option><option>B.A. Psychology</option><option>B.A. Media &amp; Journalism</option><option>B.A. English Literature</option><option>B.A. History</option><option>B.A. LL.B.</option><option>B.B.A. Business Administration</option><option>B.Com (Hons.) Accounting &amp; Finance</option><option>B.Com Accounting &amp; Finance</option><option>B.Des Graphic Design</option><option>M.B.A. Business Management</option><option>MBA (Dual Specialisation)</option></select>
+        <div class="form-error" id="appCourseErr">Please select a programme.</div>
+      </div>
+      <div class="form-group"><label for="appMsg">Message for admissions team</label><textarea id="appMsg" rows="3" placeholder="Anything you'd like us to know…"></textarea></div>
+      <button type="submit" class="btn-royal" style="width:100%">Submit Application</button>
+      <div class="form-success" id="applySuccess">✅ Application received. We shall contact you within two working days.</div>
+    </form>
+  </div>
+</div>
+
+<!-- FACILITIES -->
+<section id="facilities">
+  <div class="container">
+    <div class="facilities-head">
+      <span class="eyebrow">Campus Life</span>
+      <h2 class="display-title">World-Class <span style="color:var(--gold)">Facilities</span></h2>
+      <div class="ornamental-rule center-rule"><span>✦</span></div>
+      <p class="section-sub facilities-sub">Everything you need to learn, grow, and thrive — all within one magnificent campus.</p>
+    </div>
+    <div class="facilities-grid">
+      <div class="facility-card"><div class="facility-icon">📚</div><h3>Central Library</h3><p>Over 2 lakh volumes, 500+ e-journals, and dedicated research reading rooms open 24 hours during exam periods.</p></div>
+      <div class="facility-card"><div class="facility-icon">🔬</div><h3>Advanced Research Labs</h3><p>100+ fully-equipped laboratories for engineering, life sciences, and computing with industry-standard equipment.</p></div>
+      <div class="facility-card"><div class="facility-icon">🏋️</div><h3>Sports Complex</h3><p>Olympic-sized swimming pool, cricket ground, football turf, tennis courts, and a fully-equipped gymnasium.</p></div>
+      <div class="facility-card"><div class="facility-icon">🏠</div><h3>Residential Hostels</h3><p>Separate AC hostels for men and women with housekeeping, security, and high-speed internet.</p></div>
+      <div class="facility-card"><div class="facility-icon">🍽️</div><h3>Multi-Cuisine Cafeteria</h3><p>FSSAI-certified food courts serving 2,500+ students daily with vegetarian, vegan, and international options.</p></div>
+      <div class="facility-card"><div class="facility-icon">📶</div><h3>Smart Campus Wi-Fi</h3><p>1 Gbps fibre-optic network blanketing the entire 300-acre campus — keeping every scholar connected.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="container">
+    <div class="gallery-head">
+      <span class="eyebrow">Campus Moments</span>
+      <h2 class="display-title">Life at <span class="accent">Aurevia</span></h2>
+      <div class="ornamental-rule center-rule"><span>✦</span></div>
+    </div>
+    <div class="gallery-grid" id="galleryGrid">
+      <div class="gallery-item" data-index="0" data-caption="Main Academic Block — Aurevia University"><img src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=800&h=600&fit=crop&q=80" alt="Main Academic Block" loading="lazy"/><div class="gallery-overlay"><span>Campus Block</span></div></div>
+      <div class="gallery-item" data-index="1" data-caption="Convocation Ceremony 2024"><img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?w=800&h=400&fit=crop&q=80" alt="Convocation Ceremony" loading="lazy"/><div class="gallery-overlay"><span>Convocation</span></div></div>
+      <div class="gallery-item" data-index="2" data-caption="Annual Sports Meet — Aurevia Arena"><img src="https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800&h=400&fit=crop&q=80" alt="Sports Meet" loading="lazy"/><div class="gallery-overlay"><span>Sports Arena</span></div></div>
+      <div class="gallery-item" data-index="3" data-caption="Central Library Reading Hall"><img src="https://images.unsplash.com/photo-1521587760476-6c12a4b040da?w=800&h=400&fit=crop&q=80" alt="Library" loading="lazy"/><div class="gallery-overlay"><span>Central Library</span></div></div>
+      <div class="gallery-item" data-index="4" data-caption="Innovation &amp; Research Lab"><img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=800&h=600&fit=crop&q=80" alt="Research Lab" loading="lazy"/><div class="gallery-overlay"><span>Research Lab</span></div></div>
+      <div class="gallery-item" data-index="5" data-caption="Campus Gardens &amp; Amphitheatre"><img src="https://images.unsplash.com/photo-1541339907198-e08756dedf3f?w=800&h=600&fit=crop&q=80" alt="Campus Gardens" loading="lazy"/><div class="gallery-overlay"><span>Campus Gardens</span></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox">
+  <div class="lightbox-inner" id="lightboxInner">
+    <button class="lb-close" id="lbClose" aria-label="Close lightbox">✕</button>
+    <button class="lb-nav lb-prev" id="lbPrev" aria-label="Previous image">‹</button>
+    <img id="lbImg" src="" alt="" />
+    <button class="lb-nav lb-next" id="lbNext" aria-label="Next image">›</button>
+    <div class="lb-caption" id="lbCaption"></div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:3.2rem;">
+      <span class="eyebrow">Get In Touch</span>
+      <h2 class="display-title">Contact <span class="accent">Us</span></h2>
+      <div class="ornamental-rule center-rule"><span>✦</span></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info-panel">
+        <h3>We'd love to hear from you</h3>
+        <p>Whether you have a question about admissions, courses, or campus life — our team is here to assist.</p>
+        <div class="contact-items">
+          <div class="contact-item"><div class="ci-icon">📍</div><div><div class="ci-label">Address</div><div class="ci-value">Aurevia University, NH-48, Oragadam, Chennai — 602 105, Tamil Nadu</div></div></div>
+          <div class="contact-item"><div class="ci-icon">📞</div><div><div class="ci-label">Phone</div><div class="ci-value">+91 44 2345 6789 &nbsp;|&nbsp; +91 98765 12345</div></div></div>
+          <div class="contact-item"><div class="ci-icon">✉️</div><div><div class="ci-label">Email</div><div class="ci-value">admissions@aureviauniversity.edu.in</div></div></div>
+          <div class="contact-item"><div class="ci-icon">🕐</div><div><div class="ci-label">Office Hours</div><div class="ci-value">Mon – Fri: 9 AM – 5 PM &nbsp;|&nbsp; Sat: 9 AM – 1 PM</div></div></div>
+        </div>
+        <iframe class="map-placeholder" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3888.0!2d80.1!3d13.0!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTPCsDAwJzAwLjAiTiA4MMKwMDYnMDAuMCJF!5e0!3m2!1sen!2sin!4v1234567890" loading="lazy" allowfullscreen title="Aurevia University Location"></iframe>
+      </div>
+      <div class="contact-form-panel">
+        <h3>Send a Message</h3>
+        <form id="contactForm" novalidate>
+          <div class="form-row">
+            <div class="form-group"><label for="cName">Name *</label><input type="text" id="cName" placeholder="Your name"/><div class="form-error" id="cNameErr">Name is required.</div></div>
+            <div class="form-group"><label for="cEmail">Email *</label><input type="email" id="cEmail" placeholder="you@email.com"/><div class="form-error" id="cEmailErr">Enter a valid email.</div></div>
+          </div>
+          <div class="form-group"><label for="cSubject">Subject *</label><input type="text" id="cSubject" placeholder="What is this regarding?"/><div class="form-error" id="cSubjectErr">Subject is required.</div></div>
+          <div class="form-group"><label for="cMsg">Message *</label><textarea id="cMsg" rows="5" placeholder="Write your message here…"></textarea><div class="form-error" id="cMsgErr">Message cannot be empty.</div></div>
+          <button type="submit" class="contact-submit">Dispatch Message →</button>
+          <div class="form-success" id="contactSuccess">✅ Message received. We shall reply within 24 hours.</div>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-top-rule"></div>
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="display:flex;align-items:center;gap:.8rem;margin-bottom:1rem;">
+          <div class="nav-crest">AU</div>
+          <div class="nav-name-wrap"><div class="nav-title">Aurevia University</div><span class="nav-sub">Est. 1985</span></div>
+        </div>
+        <p>Committed to excellence in education, research, and community service since 1985. NAAC A++ Accredited.</p>
+      </div>
+      <div class="footer-col"><h4>Quick Links</h4><ul><li><a href="#about">About Us</a></li><li><a href="#courses">Programmes</a></li><li><a href="#facilities">Facilities</a></li><li><a href="#admissions">Admissions</a></li><li><a href="#gallery">Gallery</a></li></ul></div>
+      <div class="footer-col"><h4>Departments</h4><ul><li><a href="#courses">Engineering</a></li><li><a href="#courses">Arts &amp; Science</a></li><li><a href="#courses">Commerce &amp; MBA</a></li><li><a href="#courses">Law</a></li><li><a href="#courses">Design</a></li></ul></div>
+      <div class="footer-col"><h4>Contact</h4><ul><li><a href="mailto:admissions@aureviauniversity.edu.in">admissions@aureviauniversity.edu.in</a></li><li><a href="tel:+914423456789">+91 44 2345 6789</a></li><li style="color:rgba(240,232,208,.42);font-family:'Crimson Pro',serif;font-size:.97rem;">NH-48, Oragadam,<br>Chennai — 602 105</li></ul></div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2025 Aurevia University. All rights reserved.</span>
+      <span>Designed with reverence for the pursuit of knowledge</span>
+    </div>
+  </div>
+</footer>
+
+<button id="scroll-top" aria-label="Scroll to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+/* ─── Theme toggle ─── */
+const html = document.documentElement;
+const themeToggle = document.getElementById('themeToggle');
+const themeLabel = document.getElementById('themeLabel');
+const saved = localStorage.getItem('au-theme');
+if (saved) { html.dataset.theme = saved; themeLabel.textContent = saved === 'dark' ? '☾' : '☀'; }
+themeToggle.addEventListener('click', () => {
+  const isDark = html.dataset.theme === 'dark';
+  html.dataset.theme = isDark ? 'light' : 'dark';
+  themeLabel.textContent = isDark ? '☀' : '☾';
+  localStorage.setItem('au-theme', html.dataset.theme);
+});
+
+/* ─── Navbar scroll ─── */
+const navbar = document.getElementById('navbar');
+window.addEventListener('scroll', () => {
+  navbar.classList.toggle('scrolled', window.scrollY > 40);
+  document.getElementById('scroll-top').classList.toggle('visible', window.scrollY > 400);
+});
+
+/* ─── Mobile nav ─── */
+document.getElementById('navToggle').addEventListener('click', () => {
+  document.getElementById('navLinks').classList.toggle('open');
+});
+document.querySelectorAll('#navLinks .nav-links a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navLinks').classList.remove('open'));
+});
+
+/* ─── Counter animation ─── */
+function animateCounter(el) {
+  const target = +el.dataset.target;
+  const step = target / (2200 / 16);
+  let current = 0;
+  const timer = setInterval(() => {
+    current = Math.min(current + step, target);
+    el.textContent = Math.floor(current).toLocaleString('en-IN');
+    if (current >= target) clearInterval(timer);
+  }, 16);
+}
+const statsObserver = new IntersectionObserver(entries => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.querySelectorAll('.counter').forEach(animateCounter);
+      statsObserver.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.3 });
+statsObserver.observe(document.getElementById('stats'));
+
+/* ─── Course filter ─── */
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const filter = btn.dataset.filter;
+    document.querySelectorAll('.course-card').forEach(card => {
+      card.classList.toggle('hidden', filter !== 'all' && card.dataset.category !== filter);
+    });
+  });
+});
+
+/* ─── Fee table sort ─── */
+let sortState = { col: -1, asc: true };
+document.querySelectorAll('.fee-table thead th').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = +th.dataset.col;
+    sortState.asc = sortState.col === col ? !sortState.asc : true;
+    sortState.col = col;
+    const tbody = document.getElementById('feeTableBody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    rows.sort((a, b) => {
+      let av = a.cells[col].textContent.trim();
+      let bv = b.cells[col].textContent.trim();
+      const an = parseFloat(av.replace(/[₹,\s]/g,'').replace('Years','').trim());
+      const bn = parseFloat(bv.replace(/[₹,\s]/g,'').replace('Years','').trim());
+      if (!isNaN(an) && !isNaN(bn)) return sortState.asc ? an - bn : bn - an;
+      return sortState.asc ? av.localeCompare(bv) : bv.localeCompare(av);
+    });
+    rows.forEach(r => tbody.appendChild(r));
+    document.querySelectorAll('.fee-table thead th .sort-icon').forEach(ic => ic.textContent = '⇅');
+    th.querySelector('.sort-icon').textContent = sortState.asc ? '↑' : '↓';
+  });
+});
+
+/* ─── Modal ─── */
+function openModal() { document.getElementById('applyModal').classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeModal() { document.getElementById('applyModal').classList.remove('open'); document.body.style.overflow = ''; }
+document.getElementById('applyModal').addEventListener('click', e => { if (e.target === document.getElementById('applyModal')) closeModal(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape') { closeModal(); closeLightbox(); } });
+document.getElementById('applyForm').addEventListener('submit', e => {
+  e.preventDefault(); let valid = true;
+  function check(id, errId, cond) { const el = document.getElementById(id); const err = document.getElementById(errId); if (!cond(el.value)) { err.classList.add('show'); valid = false; } else err.classList.remove('show'); }
+  check('appName','appNameErr', v => v.trim().length > 1);
+  check('appEmail','appEmailErr', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+  check('appPhone','appPhoneErr', v => /^[\d\s\+\-]{8,}$/.test(v));
+  check('appCourse','appCourseErr', v => v !== '');
+  if (valid) {
+    document.getElementById('applySuccess').style.display = 'block';
+    document.getElementById('applyForm').querySelectorAll('input,select,textarea').forEach(el => el.value = '');
+    setTimeout(closeModal, 3200);
+  }
+});
+
+/* ─── Gallery / Lightbox ─── */
+const galleryItems = document.querySelectorAll('.gallery-item');
+const lightbox = document.getElementById('lightbox');
+const lbImg = document.getElementById('lbImg');
+const lbCaption = document.getElementById('lbCaption');
+let currentLbIndex = 0;
+const lbData = Array.from(galleryItems).map(item => ({ src: item.querySelector('img').src, caption: item.dataset.caption }));
+function openLightbox(i) { currentLbIndex = i; lbImg.src = lbData[i].src; lbImg.alt = lbData[i].caption; lbCaption.textContent = lbData[i].caption; lightbox.classList.add('open'); document.body.style.overflow = 'hidden'; }
+function closeLightbox() { lightbox.classList.remove('open'); document.body.style.overflow = ''; }
+function lbNav(dir) { currentLbIndex = (currentLbIndex + dir + lbData.length) % lbData.length; lbImg.src = lbData[currentLbIndex].src; lbImg.alt = lbData[currentLbIndex].caption; lbCaption.textContent = lbData[currentLbIndex].caption; }
+galleryItems.forEach((item, i) => item.addEventListener('click', () => openLightbox(i)));
+document.getElementById('lbClose').addEventListener('click', closeLightbox);
+document.getElementById('lbPrev').addEventListener('click', e => { e.stopPropagation(); lbNav(-1); });
+document.getElementById('lbNext').addEventListener('click', e => { e.stopPropagation(); lbNav(1); });
+lightbox.addEventListener('click', e => { if (e.target === lightbox) closeLightbox(); });
+document.addEventListener('keydown', e => { if (!lightbox.classList.contains('open')) return; if (e.key === 'ArrowLeft') lbNav(-1); if (e.key === 'ArrowRight') lbNav(1); });
+
+/* ─── Contact form ─── */
+document.getElementById('contactForm').addEventListener('submit', e => {
+  e.preventDefault(); let valid = true;
+  function chk(id, errId, cond) { const el = document.getElementById(id); const err = document.getElementById(errId); if (!cond(el.value)) { err.classList.add('show'); valid = false; } else err.classList.remove('show'); }
+  chk('cName','cNameErr', v => v.trim().length > 1);
+  chk('cEmail','cEmailErr', v => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v));
+  chk('cSubject','cSubjectErr', v => v.trim().length > 1);
+  chk('cMsg','cMsgErr', v => v.trim().length > 5);
+  if (valid) {
+    document.getElementById('contactSuccess').style.display = 'block';
+    document.getElementById('contactForm').querySelectorAll('input,textarea').forEach(el => el.value = '');
+    setTimeout(() => document.getElementById('contactSuccess').style.display = 'none', 4000);
+  }
+});
+</script>
+</body>
+</html>
